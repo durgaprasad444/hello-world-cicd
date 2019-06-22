@@ -28,11 +28,11 @@
 	
   <distributionManagement>
     <repository>
-      <id>nexus</id>
+      <id>admin</id>
       <url>http://35.227.76.219:8081/repository/maven-example/</url>
     </repository>
     <snapshotRepository>
-      <id>nexus</id>
+      <id>admin</id>
       <url>http://35.227.76.219:8081/repository/maven-example/</url>
     </snapshotRepository>
   </distributionManagement>
