@@ -26,15 +26,6 @@
 		</plugins>
 	</build>
 	
-  <distributionManagement>
-    <repository>
-      <id>admin</id>
-      <url>http://35.227.76.219:8081/repository/maven-example/</url>
-    </repository>
-    <snapshotRepository>
-      <id>admin</id>
-      <url>http://35.227.76.219:8081/repository/maven-example/</url>
-    </snapshotRepository>
-  </distributionManagement>
+  
 
 </project>
