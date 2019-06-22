@@ -69,7 +69,7 @@ stage('Push image') {
         stage("deploy on kubernetes") {
             container('slave1') {
                 sh "kubectl apply -f hello-kubernetes.yaml"
-                sh "kubectl set image deployment/maven-example maven-example-sha256=gcr.io/kube-cluster/${APP_NAME}-${tag}:$BUILD_NUMBER"
+                sh "kubectl set image deployment/hello-kubernetes hello-kubernetes=gcr.io/kube-cluster-237706/${APP_NAME}-${tag}:$BUILD_NUMBER"
             }
         }
                 }
