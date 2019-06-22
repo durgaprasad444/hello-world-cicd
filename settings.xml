@@ -4,9 +4,9 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd">
 <servers>
 <server>
-<id>admin</id>
-<username>admin</username>
-<password>{kZN9RWpaxPYHb87F/LXE1yzkUbFkLQf4T6lP3WZazwk=}</password>
+<id>nexus</id>
+<username>nexus</username>
+<password>{61BVoUokN6IHEXJ3T38868R/T5gLaXSzzXb0lsH19eU=}</password>
 </server>
 </servers>
 <mirrors>
