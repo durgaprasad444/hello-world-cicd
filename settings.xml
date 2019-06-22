@@ -11,7 +11,7 @@ xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.o
 </servers>
 <mirrors>
 <mirror>
-<id>admin</id>
+<id>nexus</id>
 <url>http://35.227.76.219:8081/repository/maven-central/</url>
 <mirrorOf>*</mirrorOf>
 </mirror>
