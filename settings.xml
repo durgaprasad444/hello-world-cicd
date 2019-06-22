@@ -5,14 +5,14 @@ xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.o
 <servers>
 <server>
 <id>nexus</id>
-<username>nexus</username>
-<password>{qMr7DUF42nYH5UOluLw0th76OiL8hVfstFbhz5SxJHQ=}</password>
+<username>admin</username>
+<password>{kZN9RWpaxPYHb87F/LXE1yzkUbFkLQf4T6lP3WZazwk=}</password>
 </server>
 </servers>
 <mirrors>
 <mirror>
 <id>nexus</id>
-<url>http://35.196.136.112:8081/repository/maven-group/</url>
+<url>http://35.227.76.219:8081/repository/maven-central/</url>
 <mirrorOf>*</mirrorOf>
 </mirror>
 </mirrors>
