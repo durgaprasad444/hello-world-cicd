@@ -25,8 +25,23 @@ volumes: [
             container('slave1') {
                     // If you are using Windows then you should use "bat" step
                     // Since unit testing is out of the scope we skip them
-                    sh "mvn deploy -DskipTests=true"
+                    sh "mvn package -DskipTests=true"
             }
+        }
+        
+         stage("publish to nexus") {
+            container('slave1') {
+def pom = readMavenPom file: 'pom.xml'
+ nexusPublisher nexusInstanceId: 'localNexus', \
+  nexusRepositoryId: 'maven-example', \
+  packages: [[$class: 'MavenPackage', \
+  mavenAssetList: [[classifier: '', extension: '', \
+  filePath: "target/${pom.artifactId}-${pom.version}.${pom.packaging}"]], \
+  mavenCoordinate: [artifactId: "${pom.artifactId}", \
+  groupId: "${pom.groupId}", \
+  packaging: "${pom.packaging}", \
+  version: "${pom.version}"]]]
+}
         }
         stage('Build image') {
             container('slave1') {
