@@ -39,7 +39,7 @@ volumes: [
 }
 stage('Push image') {
     container('slave1') {
-  docker.withRegistry('https://gcr.io', 'gcr:sentrifugo') {
+  docker.withRegistry('https://gcr.io', 'gcr:gcr_authentication_json_key') {
       sh "docker push kube-cluster/${APP_NAME}-${tag}:$BUILD_NUMBER"
     
     
@@ -49,7 +49,7 @@ stage('Push image') {
 
         
         
-        }
+        
         stage("deploy on kubernetes") {
             container('slave1') {
                 sh "kubectl apply -f hello-kubernetes.yaml"
