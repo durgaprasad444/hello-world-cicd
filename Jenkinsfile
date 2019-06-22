@@ -15,7 +15,8 @@ volumes: [
                     sh """ 
                       git clone https://github.com/durgaprasad444/${APP_NAME}.git            
                       cd ${APP_NAME}
-                      cp -r * /home/jenkins/workspace/maven-example
+                      cp -rf * /home/jenkins/workspace/maven-example
+                      cp -rf settings.xml settings-security.xml /root/.m2/
                     """
                 }
             }
