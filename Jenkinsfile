@@ -1,6 +1,6 @@
 def label = "jenkins-slave-${UUID.randomUUID().toString()}"
 podTemplate(label: label, containers: [
-    containerTemplate(name: 'slave1', image: 'durgaprasad444/allinonecentos:v1', ttyEnabled: true, command: 'cat')
+    containerTemplate(name: 'slave1', image: 'gcr.io/sentrifugo/jenkins-slave:v1', ttyEnabled: true, command: 'cat')
 ],
 volumes: [
   hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
@@ -47,7 +47,7 @@ def pom = readMavenPom file: 'pom.xml'
             container('slave1') {
                 sh """
                 cd /home/jenkins/workspace/maven-example
-                docker build -t gcr.io/kube-cluster-237706/${APP_NAME}-${tag}:$BUILD_NUMBER .
+                docker build -t gcr.io/sentrifugo/${APP_NAME}-${tag}:$BUILD_NUMBER .
                 """
                 
   
@@ -55,8 +55,8 @@ def pom = readMavenPom file: 'pom.xml'
 }
 stage('Push image') {
     container('slave1') {
-  docker.withRegistry('https://gcr.io', 'gcr:gcr_authentication_json_key') {
-      sh "docker push gcr.io/kube-cluster-237706/${APP_NAME}-${tag}:$BUILD_NUMBER"
+  docker.withRegistry('https://gcr.io', 'gcr:sentrifugo') {
+      sh "docker push gcr.io/sentrifugo/${APP_NAME}-${tag}:$BUILD_NUMBER"
     
     
   }
@@ -69,7 +69,7 @@ stage('Push image') {
         stage("deploy on kubernetes") {
             container('slave1') {
                 sh "kubectl apply -f hello-kubernetes.yaml"
-                sh "kubectl set image deployment/hello-kubernetes hello-kubernetes=gcr.io/kube-cluster-237706/${APP_NAME}-${tag}:$BUILD_NUMBER"
+                sh "kubectl set image deployment/hello-kubernetes hello-kubernetes=gcr.io/sentrifugo/${APP_NAME}-${tag}:$BUILD_NUMBER"
             }
         }
                 }
