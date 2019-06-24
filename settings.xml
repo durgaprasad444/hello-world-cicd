@@ -12,7 +12,7 @@ xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.o
 <mirrors>
 <mirror>
 <id>nexus</id>
-<url>http://35.227.76.219:8081/repository/maven-central/</url>
+<url>http://prdartifact.digitaldais.net:8081/repository/maven-central/</url>
 <mirrorOf>*</mirrorOf>
 </mirror>
 </mirrors>
