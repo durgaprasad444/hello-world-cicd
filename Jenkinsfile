@@ -1,6 +1,6 @@
 def label = "jenkins-slave-${UUID.randomUUID().toString()}"
 podTemplate(label: label, containers: [
-    containerTemplate(name: 'slave1', image: 'gcr.io/sentrifugo/jenkins-slave:v1', ttyEnabled: true, command: 'cat')
+    containerTemplate(name: 'slave1', image: 'durgaprasad444/jenmine:1.1', ttyEnabled: true, command: 'cat')
 ],
 volumes: [
   hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
@@ -16,8 +16,6 @@ volumes: [
                       git clone https://github.com/durgaprasad444/${APP_NAME}.git            
                       cd ${APP_NAME}
                       cp -rf * /home/jenkins/workspace/maven-example
-                      mkdir /root/.m2
-                      cp -rf settings.xml settings-security.xml /root/.m2/
                     """
                 }
             }
@@ -29,20 +27,7 @@ volumes: [
             }
         }
         
-         stage("publish to nexus") {
-            container('slave1') {
-def pom = readMavenPom file: 'pom.xml'
- nexusPublisher nexusInstanceId: 'localNexus', \
-  nexusRepositoryId: 'maven-example', \
-  packages: [[$class: 'MavenPackage', \
-  mavenAssetList: [[classifier: '', extension: '', \
-  filePath: "target/${pom.artifactId}-${pom.version}.${pom.packaging}"]], \
-  mavenCoordinate: [artifactId: "${pom.artifactId}", \
-  groupId: "${pom.groupId}", \
-  packaging: "${pom.packaging}", \
-  version: "${pom.version}"]]]
-}
-        }
+
         stage('Build image') {
             container('slave1') {
                 sh """
@@ -55,11 +40,12 @@ def pom = readMavenPom file: 'pom.xml'
 }
 stage('Push image') {
     container('slave1') {
-  docker.withRegistry('https://gcr.io', 'gcr:sentrifugo') {
-      sh "docker push gcr.io/sentrifugo/${APP_NAME}-${tag}:$BUILD_NUMBER"
+  
+      sh 'docker login -u my-account -p xxxx'
+      sh "docker push docker.io/username/${APP_NAME}-${tag}:$BUILD_NUMBER"
     
     
-  }
+  
     }
 }
 
