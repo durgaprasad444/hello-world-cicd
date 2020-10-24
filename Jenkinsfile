@@ -1,5 +1,5 @@
 def label = "jenkins-slave-${UUID.randomUUID().toString()}"
-podTemplate(label: label, containers: [
+podTemplate(label: label, cloud: openshift, containers: [
     containerTemplate(name: 'slave1', image: 'durgaprasad444/jenmine:1.1', ttyEnabled: true, command: 'cat')
 ],
 volumes: [
