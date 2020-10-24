@@ -1,6 +1,9 @@
-def label = "jenkins-slave-${UUID.randomUUID().toString()}"
-podTemplate(label: label, cloud: openshift, containers: [
-    containerTemplate(name: 'slave1', image: 'durgaprasad444/jenmine:1.1', ttyEnabled: true, command: 'cat')
+podTemplate(
+  label: 'dotnet-build-pod', cloud: 'openshift',
+  containers: [
+    containerTemplate(
+      name: 'dotnet-build-pod', image: 'durgaprasad444/jenmine:1.1'
+        )
 ],
 volumes: [
   hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
