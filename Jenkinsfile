@@ -58,7 +58,7 @@ volumes: [
             container('slave') {
                 sh "cd /home/jenkins/agent/workspace/java-app/helloworld-cicd"
                 sh "kubectl apply -f hello-kubernetes.yaml"
-                sh "kubectl set image deployment/hello-kubernetes hello-kubernetes=gcr.io/sentrifugo/${APP_NAME}-${tag}:$BUILD_NUMBER"
+                sh "kubectl set image deployment/hello-kubernetes hello-kubernetes=durgaprasad444/${APP_NAME}-${tag}:$BUILD_NUMBER"
             }
         }
                 }
