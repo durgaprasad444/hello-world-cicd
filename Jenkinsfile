@@ -15,7 +15,7 @@ volumes: [
                     sh """ 
                       git clone https://github.com/durgaprasad444/${APP_NAME}.git            
                       cd ${APP_NAME}
-                      cp -rf * /home/jenkins/workspace/maven-example
+                      cp -rf * /home/jenkins/agent/workspace/java-app/helloworld-cicd
                     """
                 }
             }
@@ -31,7 +31,7 @@ volumes: [
         stage('Build image') {
             container('slave') {
                 sh """
-                cd /home/jenkins/workspace/maven-example
+                cd /home/jenkins/agent/workspace/java-app/helloworld-cicd
                 docker build -t durgaprasad444/${APP_NAME}-${tag}:$BUILD_NUMBER .
                 """
                 
@@ -56,6 +56,7 @@ volumes: [
         
         stage("deploy on kubernetes") {
             container('slave') {
+                sh "cd /home/jenkins/agent/workspace/java-app/helloworld-cicd"
                 sh "kubectl apply -f hello-kubernetes.yaml"
                 sh "kubectl set image deployment/hello-kubernetes hello-kubernetes=gcr.io/sentrifugo/${APP_NAME}-${tag}:$BUILD_NUMBER"
             }
