@@ -1,7 +1,7 @@
 
 def label = "jenkins-slave-${UUID.randomUUID().toString()}"
 podTemplate(label: label, containers: [
-    containerTemplate(name: 'slave', image: 'durgaprasad444/jenmine-slave:v2', ttyEnabled: true, command: 'cat'
+    containerTemplate(name: 'slave', image: 'durgaprasad444/jenmine-slave:v2', ttyEnabled: true, command: 'cat')
 ],
 volumes: [
   hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
