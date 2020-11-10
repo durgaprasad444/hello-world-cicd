@@ -9,7 +9,7 @@ volumes: [
     node(label) {
         def APP_NAME = "helloworld-cicd"
         def tag = "dev"
-            stage("clone code") {
+            stage("CLONE CODE") {
                 container('slave') {
                     
                     // Let's clone the source
@@ -20,7 +20,7 @@ volumes: [
                     """
                 }
             }
-        stage("mvn build") {
+        stage("MAVEN BUILD") {
             container('slave') {
                     // If you are using Windows then you should use "bat" step
                     // Since unit testing is out of the scope we skip them
@@ -29,7 +29,7 @@ volumes: [
         }
         
 
-        stage('Build image') {
+        stage('BUILD IMAGE') {
             container('slave') {
                 sh """
                 cd /home/jenkins/agent/workspace/java-app/helloworld-cicd
@@ -55,7 +55,7 @@ volumes: [
         
         
         
-        stage("deploy on kubernetes") {
+        stage("DEPLOY ON KUBERNETES") {
             container('slave') {
                 sh "cd /home/jenkins/agent/workspace/java-app/helloworld-cicd"
                 sh "kubectl apply -f hello-kubernetes.yaml"
