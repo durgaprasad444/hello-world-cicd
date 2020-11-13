@@ -26,7 +26,7 @@ volumes: [
                     sh """ 
                    
                       #git clone https://github.com/durgaprasad444/${APP_NAME}.git            
-                      cd /home/jenkins/agent/workspace/helloworld-cicd/prod_pipeline/
+                      cd /home/jenkins/agent/workspace/helloworld-cicd/feature_pipeline/
                     """
                 }
             }
@@ -42,7 +42,7 @@ volumes: [
         stage('BUILD IMAGE') {
             container('slave') {
                 sh """
-                cd /home/jenkins/agent/workspace/helloworld-cicd/prod_pipeline/
+                cd /home/jenkins/agent/workspace/helloworld-cicd/feature_pipeline/
                 docker build -t durgaprasad444/${APP_NAME}-${tag}:$BUILD_NUMBER .
                 """
                 
@@ -67,7 +67,7 @@ volumes: [
         
         stage("DEPLOY ON KUBERNETES") {
             container('slave') {
-                sh "cd /home/jenkins/agent/workspace/helloworld-cicd/prod_pipeline/"
+                sh "cd /home/jenkins/agent/workspace/helloworld-cicd/feature_pipeline/"
                 sh "kubectl apply -f hello-kubernetes.yaml"
                 sh "kubectl set image deployment/hello-kubernetes hello-kubernetes=durgaprasad444/${APP_NAME}-${tag}:$BUILD_NUMBER"
             }
