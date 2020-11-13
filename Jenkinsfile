@@ -12,11 +12,21 @@ volumes: [
             stage("CLONE CODE") {
                 container('slave') {
                     
+                      stage 'checkout  repository'
+  checkout([$class: 'GitSCM',
+        branches: [[name: '*/develop']],
+        doGenerateSubmoduleConfigurations: false,
+        extensions: [],
+        submoduleCfg: [],
+        userRemoteConfigs: [[
+            url: 'https://github.com/durgaprasad444/helloworld-cicd.git'
+    ]]])
+                    
                     // Let's clone the source
                     
                     sh """ 
-                      git checkout
-                      git clone https://github.com/durgaprasad444/${APP_NAME}.git            
+                   
+                      #git clone https://github.com/durgaprasad444/${APP_NAME}.git            
                       cd ${APP_NAME}
                       cp -rf * /home/jenkins/agent/workspace/java-app/helloworld-cicd
                     """
