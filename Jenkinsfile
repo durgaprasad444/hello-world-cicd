@@ -13,7 +13,9 @@ volumes: [
                 container('slave') {
                     
                     // Let's clone the source
+                    
                     sh """ 
+                      git checkout
                       git clone https://github.com/durgaprasad444/${APP_NAME}.git            
                       cd ${APP_NAME}
                       cp -rf * /home/jenkins/agent/workspace/java-app/helloworld-cicd
