@@ -27,7 +27,7 @@ volumes: [
                     sh """ 
                    
                       #git clone https://github.com/durgaprasad444/${APP_NAME}.git            
-                      cd /home/jenkins/agent/workspace/helloworld-cicd/dev_pipeline/helloworld-cicd
+                      cd /home/jenkins/agent/workspace/helloworld-cicd/dev_pipeline/
                     """
                 }
             }
