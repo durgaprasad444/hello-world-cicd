@@ -12,7 +12,6 @@ volumes: [
             stage("CLONE CODE") {
                 container('slave') {
                     
-                      stage 'checkout  repository'
   checkout([$class: 'GitSCM',
         branches: [[name: '*/develop']],
         doGenerateSubmoduleConfigurations: false,
@@ -43,7 +42,7 @@ volumes: [
         stage('BUILD IMAGE') {
             container('slave') {
                 sh """
-                cd /home/jenkins/agent/workspace/helloworld-cicd/dev_pipeline/helloworld-cicd
+                cd /home/jenkins/agent/workspace/helloworld-cicd/dev_pipeline/
                 docker build -t durgaprasad444/${APP_NAME}-${tag}:$BUILD_NUMBER .
                 """
                 
@@ -68,7 +67,7 @@ volumes: [
         
         stage("DEPLOY ON KUBERNETES") {
             container('slave') {
-                sh "cd /home/jenkins/agent/workspace/helloworld-cicd/dev_pipeline/helloworld-cicd"
+                sh "cd /home/jenkins/agent/workspace/helloworld-cicd/dev_pipeline/"
                 sh "kubectl apply -f hello-kubernetes.yaml"
                 sh "kubectl set image deployment/hello-kubernetes hello-kubernetes=durgaprasad444/${APP_NAME}-${tag}:$BUILD_NUMBER"
             }
